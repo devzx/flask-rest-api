@@ -26,7 +26,17 @@ class Item(Resource):
 
     @use_args(allowed_args)
     def put(self, args, name):
-        pass
+        item = ItemModel.find_by_name(name)
+        if item:
+            item.price = args['price']
+            item.upsert()
+            return item.json(), 200
+        item = ItemModel(name, **args)
+        item.upsert()
+        return item.json(), 201
 
     def delete(self, name):
-        pass
+        item = ItemModel.find_by_name(name)
+        if item:
+            item.delete()
+        return {'message': 'item deleted'}
