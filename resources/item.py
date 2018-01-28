@@ -21,7 +21,7 @@ class Item(Resource):
         if ItemModel.find_by_name(name):
             return {'message': 'item aleady exists'}
         item = ItemModel(name, **args)
-        item.upsert()
+        item.save_to_db()
         return item.json(), 201
 
     @use_args(allowed_args)
@@ -29,16 +29,16 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             item.price = args['price']
-            item.upsert()
+            item.save_to_db()
             return item.json(), 200
         item = ItemModel(name, **args)
-        item.upsert()
+        item.save_to_db()
         return item.json(), 201
 
     def delete(self, name):
         item = ItemModel.find_by_name(name)
         if item:
-            item.delete()
+            item.delete_from_db()
         return {'message': 'item deleted'}
 
 

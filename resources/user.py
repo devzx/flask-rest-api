@@ -17,7 +17,7 @@ class UserRegister(Resource):
         if UserModel.find_by_username(args['username']):
             return {'message': 'user already exists'}
         user = UserModel(**args)
-        user.insert()
+        user.save_to_db()
         return {'message': 'user created'}, 201
 
 
