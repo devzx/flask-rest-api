@@ -40,3 +40,8 @@ class Item(Resource):
         if item:
             item.delete()
         return {'message': 'item deleted'}
+
+
+class ItemList(Resource):
+    def get(self):
+        return {'items:': [item.json() for item in ItemModel.find_all()]}
