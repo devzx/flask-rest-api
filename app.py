@@ -4,6 +4,7 @@ from flask_jwt_simple import JWTManager
 
 from resources.item import Item, ItemList
 from resources.user import UserRegister, UserList, UserLogin
+from resources.store import Store, StoreList
 
 
 app = Flask(__name__)
@@ -20,7 +21,9 @@ def create_tabels():
 
 
 api.add_resource(Item, '/items/<string:name>')
+api.add_resource(Store, '/stores/<string:name>')
 api.add_resource(ItemList, '/items')
+api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserList, '/users')
