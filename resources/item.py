@@ -8,6 +8,7 @@ from models.item import ItemModel
 class Item(Resource):
     allowed_args = {
         'price': fields.Float(required=True),
+        'store_id': fields.Integer(required=True),
     }
 
     def get(self, name):
